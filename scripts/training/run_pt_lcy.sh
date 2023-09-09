@@ -9,7 +9,7 @@ lora_dropout=0.05
 
 pretrained_model=/content/Llama-2-7b-hf
 chinese_tokenizer_path=/content/chinese-llama-2-7b
-dataset_dir=/content/china-law-datas/datas
+dataset_dir=/content/china-law-datas/datasQA
 data_cache=/content/temp_data_cache_dir
 per_device_train_batch_size=1
 gradient_accumulation_steps=8
