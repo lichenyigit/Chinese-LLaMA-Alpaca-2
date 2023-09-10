@@ -7,7 +7,7 @@ modules_to_save="embed_tokens,lm_head"
 lora_dropout=0.05
 
 pretrained_model=/content/llama-2-7b-combined-1-pt-lora-pretrain
-chinese_tokenizer_path=/content/chinese-llama-2-7b
+chinese_tokenizer_path=/content/chinese-llama-2-chat-7b
 dataset_dir=/content/china-law-datas/datasQA
 per_device_train_batch_size=1
 per_device_eval_batch_size=1
