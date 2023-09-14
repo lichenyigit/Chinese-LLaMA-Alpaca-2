@@ -14,7 +14,7 @@ per_device_eval_batch_size=1
 gradient_accumulation_steps=8
 output_dir=output_dir
 peft_model=path/to/peft/model/dir
-validation_file=validation_file_name
+validation_file=validation_file_name.json
 
 deepspeed_config_file=ds_zero2_no_offload.json
 
