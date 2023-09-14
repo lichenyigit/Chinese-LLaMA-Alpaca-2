@@ -6,8 +6,8 @@ lora_trainable="q_proj,v_proj,k_proj,o_proj,gate_proj,down_proj,up_proj"
 modules_to_save="embed_tokens,lm_head"
 lora_dropout=0.05
 
-pretrained_model=/content/Chinese-LLaMA-Alpaca-2/scripts/training/output_dir/pt_lora_model
-chinese_tokenizer_path=/content/chinese-llama-2-chat-7b
+pretrained_model=/content/chinese-llama-2-7b
+chinese_tokenizer_path=/content/chinese-llama-2-7b
 dataset_dir=/content/china-law-datas/datasQA
 per_device_train_batch_size=1
 per_device_eval_batch_size=1
