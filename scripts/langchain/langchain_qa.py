@@ -37,7 +37,7 @@ refine_prompt_template = (
     "现在还有一些文字，（如果有需要）你可以根据它们完善现有的回答。"
     "\n\n"
     "{context_str}\n"
-    "\\nn"
+    "\n\n"
     "请根据新的文段，进一步完善你的回答。"
     " [/INST]"
 )
@@ -73,12 +73,16 @@ if __name__ == '__main__':
     model = HuggingFacePipeline.from_model_id(model_id=model_path,
             task="text-generation",
             device=0,
+            pipeline_kwargs={
+                "max_new_tokens": 400,
+                "do_sample": True,
+                "temperature": 0.2,
+                "top_k": 40,
+                "top_p": 0.9,
+                "repetition_penalty": 1.1},
             model_kwargs={
-                          "torch_dtype" : load_type,
-                          "low_cpu_mem_usage" : True,
-                          "temperature": 0.2,
-                          "max_length": 1000,
-                          "repetition_penalty":1.1}
+                "torch_dtype": load_type,
+                "low_cpu_mem_usage": True}
             )
 
     if args.chain_type == "stuff":

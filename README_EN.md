@@ -13,15 +13,20 @@
 </p>
 
 
-This project is based on the Llama-2, released by Meta, and it is the second generation of the Chinese LLaMA & Alpaca LLM project. We open-source Chinese LLaMA-2 (foundation model) and Alpaca-2 (instruction-following model). These models have been expanded and optimized with Chinese vocabulary beyond the original Llama-2. We used large-scale Chinese data for incremental pre-training, which further improved the fundamental semantic understanding of the Chinese language, resulting in a significant performance improvement compared to the first-generation models. The relevant models support a 4K context and can be expanded up to 18K+ using the NTK method.
+This project is based on the Llama-2, released by Meta, and it is the second generation of the Chinese LLaMA & Alpaca LLM project. We open-source Chinese LLaMA-2 (foundation model) and Alpaca-2 (instruction-following model). These models have been expanded and optimized with Chinese vocabulary beyond the original Llama-2. We used large-scale Chinese data for incremental pre-training, which further improved the fundamental semantic understanding of the Chinese language, resulting in a significant performance improvement compared to the first-generation models. Standard version supports 4K context, and long context version supports 16K context. All models' context size can be further extended with NTK method (up to 24K+).
 
-**The main contents of this project include:**
+#### Main Contents
 
 - 🚀 New extended Chinese vocabulary beyond Llama-2, open-sourcing the Chinese LLaMA-2 and Alpaca-2 LLMs.
 - 🚀 Open-sourced the pre-training and instruction finetuning (SFT) scripts for further tuning on user's data
 - 🚀 Quickly deploy and experience the quantized LLMs on CPU/GPU of personal PC
 - 🚀 Support for LLaMA ecosystems like [🤗transformers](https://github.com/huggingface/transformers), [llama.cpp](https://github.com/ggerganov/llama.cpp), [text-generation-webui](https://github.com/oobabooga/text-generation-webui), [LangChain](https://github.com/hwchase17/langchain), [privateGPT](https://github.com/imartinez/privateGPT), [vLLM](https://github.com/vllm-project/vllm) etc.
-- The currently open-source models are Chinese-LLaMA-2 (7B/13B) and Chinese-Alpaca-2 (7B/13B) (check our [first-gen project](https://github.com/ymcui/Chinese-LLaMA-Alpaca) for more models).
+
+#### Open-sourced Models
+
+- Base model: Chinese-LLaMA-2-7B, Chinese-LLaMA-2-13B
+- Instruction/chat model: Chinese-Alpaca-2-7B, Chinese-Alpaca-2-13B
+- Long context model: Chinese-LLaMA-2-7B-16K, Chinese-LLaMA-2-13B-16K, Chinese-Alpaca-2-7B-16K, Chinese-Alpaca-2-13B-16K
 
 ![](./pics/screencast.gif)
 
@@ -31,7 +36,11 @@ This project is based on the Llama-2, released by Meta, and it is the second gen
 
 ## News
 
-**[Aug 14, 2023] Release Chinese-LLaMA-2-13B and Chinese-Alpaca-2-13B. Add text-generation-webui/LangChain/privateGPT support. Add CFG sampling, etc. For details, see [📚 v2.0 release note](https://github.com/ymcui/Chinese-LLaMA-Alpaca-2/releases/tag/v2.0)**
+**[Sep 01, 2023] Release long context models: Chinese-Alpaca-2-7B-16K and Chinese-Alpaca-2-13B-16K, which can be directly used in downstream tasks, such as privateGPT. For details, see [📚 v3.1 release note](https://github.com/ymcui/Chinese-LLaMA-Alpaca-2/releases/tag/v3.1)**
+
+[Aug 25, 2023] Release long context models: Chinese-LLaMA-2-7B-16K and Chinese-LLaMA-2-13B-16K, which support 16K context and can be further extended up to 24K+ using NTK. For details, see [📚 v3.0 release note](https://github.com/ymcui/Chinese-LLaMA-Alpaca-2/releases/tag/v3.0)
+
+[Aug 14, 2023] Release Chinese-LLaMA-2-13B and Chinese-Alpaca-2-13B. Add text-generation-webui/LangChain/privateGPT support. Add CFG sampling, etc. For details, see [📚 v2.0 release note](https://github.com/ymcui/Chinese-LLaMA-Alpaca-2/releases/tag/v2.0)
 
 [Aug 02, 2023] Add FlashAttention-2 training support, vLLM-based inference acceleration support, a new system prompt that generates longer response, etc. For details, see [📚 v1.1 release note](https://github.com/ymcui/Chinese-LLaMA-Alpaca-2/releases/tag/v1.1)
 
@@ -63,17 +72,21 @@ This project launches the Chinese LLaMA-2 and Alpaca-2 models based on Llama-2. 
 - [FlashAttention-2](https://github.com/Dao-AILab/flash-attention) is an implementation of efficient attention mechanisms, offering **faster speed and optimized memory usage** compared to its first-generation.
 - When the context length is longer, using efficient attention technology is essential to prevent explosive growth in memory usage.
 
-**🚄 Adaptive Context Extension based on NTK**
+**🚄 Adaptive Context Extension based on PI and NTK**
 
 - In the [first generation of the project](https://github.com/ymcui/Chinese-LLaMA-Alpaca), we implemented the [context extension based on NTK](https://github.com/ymcui/Chinese-LLaMA-Alpaca/pull/743), which can support longer contexts without further training the model.
+- We release long context models, using [PI](https://arxiv.org/abs/2306.15595) and NTK methods, supporting 16K context, and can be further extended up to 24K-32K
 - Based on the above, we further designed a **convenient adaptive empirical formula** that does not require manually setting corresponding hyperparameters for different context lengths.
-- The models in this project natively support a 4K context, which can be extended to 12K with the above technology and up to 18K+ at the expense of some accuracy loss.
 
 **🤖 Simplified Bilingual System Prompt**
 
 - In the [first generation of the project](https://github.com/ymcui/Chinese-LLaMA-Alpaca), we use [Stanford Alpaca](https://github.com/tatsu-lab/stanford_alpaca) template for our Chinese Alpaca models
 - Through preliminary experiments, we found that the lengthy system prompt by Llama-2-Chat is not as effective as a simple one
 - We use a very simple system prompt while keeping the Llama-2-Chat template to better adapt to relevant ecosystems
+
+The following figure depicts all open-sourced models for our projects (including the [first-gen project](https://github.com/ymcui/Chinese-LLaMA-Alpaca)).
+
+![](./pics/models.png)
 
 ## Download
 
@@ -87,10 +100,10 @@ Below is a basic comparison between the Chinese LLaMA-2 and Alpaca-2 models, as 
 | Released Sizes                |                           7B, 13B                            |                           7B, 13B                            |
 | Training Method               |                       Causal-LM (CLM)                        |                   Instruction fine-tuning                    |
 | Training Parts                |                      LoRA + emb/lm-head                      |                      LoRA + emb/lm-head                      |
-| Trained on                    | [Original Llama-2](https://github.com/facebookresearch/llama) |                       Chinese LLaMA-2                        |
-| Training Corpus               |                   Unlabeled general corpus                   |                   Labeled instruction data                   |
+| Trained on                    | [Original Llama-2](https://github.com/facebookresearch/llama) (non-chat) |                       Chinese LLaMA-2                        |
+| Training Corpus               |           Unlabeled general corpus (120G raw text)           |            Labeled instruction data (5M samples)             |
 | Vocabulary Size<sup>[1]</sup> |                            55,296                            |                            55,296                            |
-| Context Size<sup>[2]</sup>    |                         4K (12K-18K)                         |                         4K (12K-18K)                         |
+| Context Size<sup>[2]</sup>    |      Standard: 4K (12K-18K)<br/>Long ctx: 16K (24K-32K)      |      Standard: 4K (12K-18K)<br/>Long ctx: 16K (24K-32K)      |
 | Input Template                |                         Not required                         |          Requires specific templates<sup>[3]</sup>           |
 | Suitable Scenarios            | Text continuation: Given the context, the model generates the following text | Instruction understanding: Q&A, writing, chatting, interaction, etc. |
 | Unsuitable Scenarios          |       Instruction understanding, multi-turn chat, etc.       |                 Unrestricted text generation                 |
@@ -104,23 +117,45 @@ Below is a basic comparison between the Chinese LLaMA-2 and Alpaca-2 models, as 
 
 Below are the full models, which can be used directly afterwards, without additional merging steps. Recommended for users with sufficient network bandwidth.
 
-| Model Name            |       Type        |   Training Data   |  Size   |                        Download Link                         |
-| :-------------------- | :---------------: | :---------------: | :-----: | :----------------------------------------------------------: |
-| Chinese-LLaMA-2-13B 🆕 | Base model | 120G General Text | 24.7 GB | [[Baidu]](https://pan.baidu.com/s/1T3RqEUSmyg6ZuBwMhwSmoQ?pwd=e9qy) [[Google]](https://drive.google.com/drive/folders/1YNa5qJ0x59OEOI7tNODxea-1YvMPoH05?usp=share_link) [[🤗HF]](https://huggingface.co/ziqingyang/chinese-llama-2-13b) |
-| Chinese-LLaMA-2-7B | Base model | 120G General Text | 12.9 GB | [[Baidu]](https://pan.baidu.com/s/1E5NI3nlQpx1j8z3eIzbIlg?pwd=n8k3) [[Google]](https://drive.google.com/drive/folders/18pp4I-mvQxRA7b8vF9gP-2cH_ocnXVKh?usp=share_link) [[🤗HF]](https://huggingface.co/ziqingyang/chinese-llama-2-7b) |
-| Chinese-Alpaca-2-13B 🆕 | Chat Model | 5M Instructions | 24.7 GB | [[Baidu]](https://pan.baidu.com/s/1MT_Zlap1OtdYMgoBNTS3dg?pwd=9xja) [[Google]](https://drive.google.com/drive/folders/1MTsKlzR61xmbTR4hBWzQas_MOpUZsogN?usp=share_link) [[🤗HF]](https://huggingface.co/ziqingyang/chinese-alpaca-2-13b) |
-| Chinese-Alpaca-2-7B | Chat Model | 5M Instructions | 12.9 GB | [[Baidu]](https://pan.baidu.com/s/1wxx-CdgbMupXVRBcaN4Slw?pwd=kpn9) [[Google]](https://drive.google.com/drive/folders/1JsJDVs7tE2y31PBNleBlDPsB7S0ZrY8d?usp=share_link) [[🤗HF]](https://huggingface.co/ziqingyang/chinese-alpaca-2-7b) |
+| Model Name            |       Type        |  Size   |                        Download Link                         |
+| :-------------------- | :---------------: | :-----: | :----------------------------------------------------------: |
+| Chinese-LLaMA-2-13B | Base model | 24.7 GB | [[Baidu]](https://pan.baidu.com/s/1T3RqEUSmyg6ZuBwMhwSmoQ?pwd=e9qy) [[Google]](https://drive.google.com/drive/folders/1YNa5qJ0x59OEOI7tNODxea-1YvMPoH05?usp=share_link) [[🤗HF]](https://huggingface.co/ziqingyang/chinese-llama-2-13b) |
+| Chinese-LLaMA-2-7B | Base model | 12.9 GB | [[Baidu]](https://pan.baidu.com/s/1E5NI3nlQpx1j8z3eIzbIlg?pwd=n8k3) [[Google]](https://drive.google.com/drive/folders/18pp4I-mvQxRA7b8vF9gP-2cH_ocnXVKh?usp=share_link) [[🤗HF]](https://huggingface.co/ziqingyang/chinese-llama-2-7b) |
+| Chinese-Alpaca-2-13B | Chat Model | 24.7 GB | [[Baidu]](https://pan.baidu.com/s/1MT_Zlap1OtdYMgoBNTS3dg?pwd=9xja) [[Google]](https://drive.google.com/drive/folders/1MTsKlzR61xmbTR4hBWzQas_MOpUZsogN?usp=share_link) [[🤗HF]](https://huggingface.co/ziqingyang/chinese-alpaca-2-13b) |
+| Chinese-Alpaca-2-7B | Chat Model | 12.9 GB | [[Baidu]](https://pan.baidu.com/s/1wxx-CdgbMupXVRBcaN4Slw?pwd=kpn9) [[Google]](https://drive.google.com/drive/folders/1JsJDVs7tE2y31PBNleBlDPsB7S0ZrY8d?usp=share_link) [[🤗HF]](https://huggingface.co/ziqingyang/chinese-alpaca-2-7b) |
+
+The followings are long context models, which are recommended for long context tasks. 
+
+| Model Name                |    Type    |  Size   |                        Download Link                         |
+| :------------------------ | :--------: | :-----: | :----------------------------------------------------------: |
+| Chinese-LLaMA-2-13B-16K | Base model | 24.7 GB | [[Baidu]](https://pan.baidu.com/s/1XWrh3Ru9x4UI4-XmocVT2w?pwd=f7ik) [[Google]](https://drive.google.com/drive/folders/1nii6lF0DgB1u81CnsE4cCK2jD5oq_OW-?usp=share_link) [[🤗HF]](https://huggingface.co/ziqingyang/chinese-llama-2-13b-16k) |
+| Chinese-LLaMA-2-7B-16K  | Base model | 12.9 GB | [[Baidu]](https://pan.baidu.com/s/1ZH7T7KU_up61ugarSIXw2g?pwd=pquq) [[Google]](https://drive.google.com/drive/folders/1Zc6jI5bl3myQbQsY79dWJJ8mP_fyf3iF?usp=share_link) [[🤗HF]](https://huggingface.co/ziqingyang/chinese-llama-2-7b-16k) |
+| Chinese-Alpaca-2-13B-16K 🆕 | Chat Model | 24.7 GB |                    [[百度]](https://pan.baidu.com/s/1gIzRM1eg-Xx1xV-3nXW27A?pwd=qi7c) [[Google]](https://drive.google.com/drive/folders/1mOkYQCvEqtGoZ9DaIpYFweSkSia2Q0vl?usp=share_link) [[🤗HF]](https://huggingface.co/ziqingyang/chinese-alpaca-2-13b-16k)                    |
+| Chinese-Alpaca-2-7B-16K 🆕  | Chat Model | 12.9 GB | [[百度]](https://pan.baidu.com/s/1Qk3U1LyvMb1RSr5AbiatPw?pwd=bfis) [[Google]](https://drive.google.com/drive/folders/1KBRSd2xAhiVQmamfA5wpm5ovYFRKuMdr?usp=share_link) [[🤗HF]](https://huggingface.co/ziqingyang/chinese-alpaca-2-7b-16k) |
+
+
+> [!IMPORTANT] 
+> When using long context models, please follow our wiki to correctly use them. See [Wiki](https://github.com/ymcui/Chinese-LLaMA-Alpaca-2/wiki).
 
 ### LoRA Model Download
 
 Below are the LoRA models, **which cannot be used directly and must be merged with the refactored models according to the tutorial**. Recommended for users with insufficient network bandwidth, who already have the original Llama-2 and light-weight download.
 
-| Model Name               |       Type        |   Training Data   |                       Refactored Model                       | Size  |                      LoRA Download Link                      |
-| :----------------------- | :---------------: | :---------------: | :----------------------------------------------------------: | :---: | :----------------------------------------------------------: |
-| Chinese-LLaMA-2-LoRA-13B 🆕 | Base model | 120G General Text | [Llama-2-13B-hf](https://huggingface.co/meta-llama/Llama-2-13b-hf) | 1.5 GB | [[Baidu]](https://pan.baidu.com/s/1PFKTBn54GjAjzWeQISKruw?pwd=we6s) [[Google]](https://drive.google.com/file/d/10Z_k9A9N9D_6RHrMTmbHQRCuI6s1iMb1/view?usp=share_link) [[🤗HF]](https://huggingface.co/ziqingyang/chinese-llama-2-lora-13b) |
-| Chinese-LLaMA-2-LoRA-7B | Base model | 120G General Text |        [Llama-2-7B-hf](https://huggingface.co/meta-llama/Llama-2-7b-hf)        | 1.1 GB | [[Baidu]](https://pan.baidu.com/s/1bmgqdyRh9E3a2uqOGyNqiQ?pwd=7kvq) [[Google]](https://drive.google.com/file/d/1njJGSU_PRbzjYRNw5RSbC5-4fBOXTVY3/view?usp=share_link) [[🤗HF]](https://huggingface.co/ziqingyang/chinese-llama-2-lora-7b) |
-| Chinese-Alpaca-2-LoRA-13B 🆕 | Chat Model | 5M Instructions | [Llama-2-13B-hf](https://huggingface.co/meta-llama/Llama-2-13b-hf) | 1.5 GB | [[Baidu]](https://pan.baidu.com/s/1Y5giIXOUUzI4Na6JOcviVA?pwd=tc2j) [[Google]](https://drive.google.com/file/d/1z2FIInsYJBTXipgztc-Mv7kkeqscx442/view?usp=share_link) [[🤗HF]](https://huggingface.co/ziqingyang/chinese-alpaca-2-lora-13b) |
-| Chinese-Alpaca-2-LoRA-7B | Chat Model | 5M Instructions | [Llama-2-7B-hf](https://huggingface.co/meta-llama/Llama-2-7b-hf) | 1.1 GB | [[Baidu]](https://pan.baidu.com/s/1g0olPxkB_rlZ9UUVfOnbcw?pwd=5e7w) [[Google]](https://drive.google.com/file/d/1MzJL-ZIzdJW7MIcAiYIDIDJ5dlMi8Kkk/view?usp=share_link) [[🤗HF]](https://huggingface.co/ziqingyang/chinese-alpaca-2-lora-7b) |
+| Model Name               |       Type        |                       Required Model for merging                       | Size  |                      LoRA Download Link                      |
+| :----------------------- | :---------------: | :----------------------------------------------------------: | :---: | :----------------------------------------------------------: |
+| Chinese-LLaMA-2-LoRA-13B | Base model | [Llama-2-13B-hf](https://huggingface.co/meta-llama/Llama-2-13b-hf) | 1.5 GB | [[Baidu]](https://pan.baidu.com/s/1PFKTBn54GjAjzWeQISKruw?pwd=we6s) [[Google]](https://drive.google.com/file/d/10Z_k9A9N9D_6RHrMTmbHQRCuI6s1iMb1/view?usp=share_link) [[🤗HF]](https://huggingface.co/ziqingyang/chinese-llama-2-lora-13b) |
+| Chinese-LLaMA-2-LoRA-7B | Base model |        [Llama-2-7B-hf](https://huggingface.co/meta-llama/Llama-2-7b-hf)        | 1.1 GB | [[Baidu]](https://pan.baidu.com/s/1bmgqdyRh9E3a2uqOGyNqiQ?pwd=7kvq) [[Google]](https://drive.google.com/file/d/1njJGSU_PRbzjYRNw5RSbC5-4fBOXTVY3/view?usp=share_link) [[🤗HF]](https://huggingface.co/ziqingyang/chinese-llama-2-lora-7b) |
+| Chinese-Alpaca-2-LoRA-13B | Chat Model | [Llama-2-13B-hf](https://huggingface.co/meta-llama/Llama-2-13b-hf) | 1.5 GB | [[Baidu]](https://pan.baidu.com/s/1Y5giIXOUUzI4Na6JOcviVA?pwd=tc2j) [[Google]](https://drive.google.com/file/d/1z2FIInsYJBTXipgztc-Mv7kkeqscx442/view?usp=share_link) [[🤗HF]](https://huggingface.co/ziqingyang/chinese-alpaca-2-lora-13b) |
+| Chinese-Alpaca-2-LoRA-7B | Chat Model | [Llama-2-7B-hf](https://huggingface.co/meta-llama/Llama-2-7b-hf) | 1.1 GB | [[Baidu]](https://pan.baidu.com/s/1g0olPxkB_rlZ9UUVfOnbcw?pwd=5e7w) [[Google]](https://drive.google.com/file/d/1MzJL-ZIzdJW7MIcAiYIDIDJ5dlMi8Kkk/view?usp=share_link) [[🤗HF]](https://huggingface.co/ziqingyang/chinese-alpaca-2-lora-7b) |
+
+The followings are long context models, which are recommended for long context tasks. 
+
+| Model Name                      |    Type    |                  Required Model for merging                  |  Size  |                        Download Link                         |
+| :------------------------------ | :--------: | :----------------------------------------------------------: | :----: | :----------------------------------------------------------: |
+| Chinese-LLaMA-2-LoRA-13B-16K    | Base model | [Llama-2-13B-hf](https://huggingface.co/meta-llama/Llama-2-13b-hf) | 1.5 GB | [[Baidu]](https://pan.baidu.com/s/1VrfOJmhDnXxrXcdnfX00fA?pwd=4t2j) [[Google]](https://drive.google.com/file/d/1mSpigmHcN9YX1spa4QN3IPtx43Vfs55H/view?usp=share_link) [[🤗HF]](https://huggingface.co/ziqingyang/chinese-llama-2-lora-13b-16k) |
+| Chinese-LLaMA-2-LoRA-7B-16K     | Base model | [Llama-2-7B-hf](https://huggingface.co/meta-llama/Llama-2-7b-hf) | 1.1 GB | [[Baidu]](https://pan.baidu.com/s/14Jnm7QmcDx3XsK_NHZz6Uw?pwd=5b7i) [[Google]](https://drive.google.com/file/d/1yUdyQuBMAmxmUEAvGiKbjKuxTYPPI-or/view?usp=sharing) [[🤗HF]](https://huggingface.co/ziqingyang/chinese-llama-2-lora-7b-16k) |
+| Chinese-Alpaca-2-LoRA-13B-16K 🆕 | Chat Model | [Llama-2-13B-hf](https://huggingface.co/meta-llama/Llama-2-13b-hf) | 1.5 GB | [[Baidu]](https://pan.baidu.com/s/1g42_X7Z0QWDyrrDqv2jifQ?pwd=bq7n) [[Google]](https://drive.google.com/file/d/1ppGNyMWnuLDcClXN7DBTbKxVehsn3Gd2/view?usp=share_link) [[🤗HF]](https://huggingface.co/ziqingyang/chinese-alpaca-2-lora-13b-16k) |
+| Chinese-Alpaca-2-LoRA-7B-16K 🆕  | Chat Model | [Llama-2-7B-hf](https://huggingface.co/meta-llama/Llama-2-7b-hf) | 1.1 GB | [[Baidu]](https://pan.baidu.com/s/1E7GEZ6stp8EavhkhR06FwA?pwd=ewwy) [[Google]](https://drive.google.com/file/d/1GTgDNfMdcQhHEAfMPaP-EOEk_fwDvNEK/view?usp=share_link) [[🤗HF]](https://huggingface.co/ziqingyang/chinese-alpaca-2-lora-7b-16k) |
 
 > [!IMPORTANT] 
 > As the LoRA models cannot be used separately, they must be merged with the original Llama-2 to form a complete model for model inference, quantization, or further training. Please choose one of the following methods to merge these models.
@@ -132,18 +167,20 @@ Below are the LoRA models, **which cannot be used directly and must be merged wi
 
 The models in this project mainly support the following quantization, inference, and deployment methods.
 
-| Tool                                                         | Features                                                | CPU  | GPU  | Quant | GUI  | API  | vLLM |                           Tutorial                           |
-| :----------------------------------------------------------- | ------------------------------------------------------- | :--: | :--: | :---: | :--: | :--: | :--: | :----------------------------------------------------------: |
-| [**llama.cpp**](https://github.com/ggerganov/llama.cpp)      | Rich quantization options and efficient local inference |  ✅   |  ✅   |   ✅   |  ❌   |  ✅   |  ❌   | [link](https://github.com/ymcui/Chinese-LLaMA-Alpaca-2/wiki/llamacpp_en) |
-| [**🤗Transformers**](https://github.com/huggingface/transformers) | Native transformers inference interface                 |  ✅   |  ✅   |   ✅   |  ✅   |  ❌   |  ✅  | [link](https://github.com/ymcui/Chinese-LLaMA-Alpaca-2/wiki/inference_with_transformers_en) |
-| [**Colab Demo**](https://colab.research.google.com/drive/1yu0eZ3a66by8Zqm883LLtRQrguBAb9MR?usp=sharing) | Running a Gradio web demo in Colab | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | [link](https://colab.research.google.com/drive/1yu0eZ3a66by8Zqm883LLtRQrguBAb9MR?usp=sharing) |
-| [**OpenAI API Calls**](https://platform.openai.com/docs/api-reference) | A server that implements OpenAI API |  ✅   |  ✅   |  ✅   |  ❌   |  ✅   |  ✅  | [link](https://github.com/ymcui/Chinese-LLaMA-Alpaca-2/wiki/api_calls_en) |
-| [**text-generation-webui**](https://github.com/oobabooga/text-generation-webui) | A tool for deploying model as a web UI |  ✅   |  ✅   |  ✅   |  ✅   | ✅<sup>†</sup> | ❌  | [link](https://github.com/ymcui/Chinese-LLaMA-Alpaca-2/wiki/text-generation-webui_en) |
-| [**LangChain**](https://github.com/hwchase17/langchain) | LLM application development framework, suitable for secondary development |  ✅<sup>†</sup>  |  ✅   |  ✅<sup>†</sup>   |  ❌   |  ❌   | ❌  | [link](https://github.com/ymcui/Chinese-LLaMA-Alpaca-2/wiki/langchain_en) |
-| [**privateGPT**](https://github.com/imartinez/privateGPT) | LangChain-based multi-document QA framework | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | [link](https://github.com/ymcui/Chinese-LLaMA-Alpaca-2/wiki/privategpt_en) |
+| Tool                                                         | Features                                                | CPU  | GPU  | Quant | GUI  | API  | vLLM<sup>§</sup> | 16K<sup>‡</sup> |                           Tutorial                           |
+| :----------------------------------------------------------- | ------------------------------------------------------- | :--: | :--: | :---: | :--: | :--: | :--: | :----------------------------------------------------------: | :----------------------------------------------------------: |
+| [**llama.cpp**](https://github.com/ggerganov/llama.cpp)      | Rich quantization options and efficient local inference |  ✅   |  ✅   |   ✅   |  ❌   |  ✅   |  ❌   |  ✅  | [link](https://github.com/ymcui/Chinese-LLaMA-Alpaca-2/wiki/llamacpp_en) |
+| [**🤗Transformers**](https://github.com/huggingface/transformers) | Native transformers inference interface                 |  ✅   |  ✅   |   ✅   |  ✅   |  ❌   |  ✅  |  ✅  | [link](https://github.com/ymcui/Chinese-LLaMA-Alpaca-2/wiki/inference_with_transformers_en) |
+| [**Colab Demo**](https://colab.research.google.com/drive/1yu0eZ3a66by8Zqm883LLtRQrguBAb9MR?usp=sharing) | Running a Gradio web demo in Colab | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | [link](https://colab.research.google.com/drive/1yu0eZ3a66by8Zqm883LLtRQrguBAb9MR?usp=sharing) |
+| [**OpenAI API Calls**](https://platform.openai.com/docs/api-reference) | A server that implements OpenAI API |  ✅   |  ✅   |  ✅   |  ❌   |  ✅   |  ✅  |  ✅  | [link](https://github.com/ymcui/Chinese-LLaMA-Alpaca-2/wiki/api_calls_en) |
+| [**text-generation-webui**](https://github.com/oobabooga/text-generation-webui) | A tool for deploying model as a web UI |  ✅   |  ✅   |  ✅   |  ✅   | ✅<sup>†</sup> | ❌  | ✅ | [link](https://github.com/ymcui/Chinese-LLaMA-Alpaca-2/wiki/text-generation-webui_en) |
+| [**LangChain**](https://github.com/hwchase17/langchain) | LLM application development framework, suitable for secondary development |  ✅<sup>†</sup>  |  ✅   |  ✅<sup>†</sup>   |  ❌   |  ❌   | ❌  | ✅ | [link](https://github.com/ymcui/Chinese-LLaMA-Alpaca-2/wiki/langchain_en) |
+| [**privateGPT**](https://github.com/imartinez/privateGPT) | LangChain-based multi-document QA framework | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ✅ | [link](https://github.com/ymcui/Chinese-LLaMA-Alpaca-2/wiki/privategpt_en) |
 
 > [!NOTE]
-> <sup>†</sup>: Supported by this tool, but not implemented in the tutorial. Please refer to the official documentation for details.
+> <sup>†</sup>: Supported by this tool, but not implemented in the tutorial. Please refer to the official documentation for details. <br/>
+> <sup>‡</sup>: Support 16K long context or not (requires customized RoPE support)</br>
+> <sup>§</sup>: vLLM backend does not support our 16K long context models. </br>
 
 ## System Performance
 
@@ -155,16 +192,19 @@ In order to intuitively understand the generation performance of the model, this
 
 | System                                                       | Win Rate (no tie)↓ | Elo Rating |
 | ------------------------------------------------------------ | :----------------: | :--------: |
-| [Alpaca-Pro-33B](https://github.com/ymcui/Chinese-LLaMA-Alpaca) |       68.98%       |  1584.23   |
-| [Alpaca-Pro-7B](https://github.com/ymcui/Chinese-LLaMA-Alpaca) |       66.38%       |  1626.87   |
-| **Alpaca-2-7B**                                              |       66.24%       |  1541.09   |
-| [Alpaca-Pro-13B](https://github.com/ymcui/Chinese-LLaMA-Alpaca) |       65.94%       |  1518.04   |
-| [Alpaca-Plus-33B](https://github.com/ymcui/Chinese-LLaMA-Alpaca) |       34.09%       |  1475.68   |
-| [Alpaca-Plus-13B](https://github.com/ymcui/Chinese-LLaMA-Alpaca) |       25.79%       |  1411.07   |
-| [Alpaca-Plus-7B](https://github.com/ymcui/Chinese-LLaMA-Alpaca) |       22.13%       |  1343.01   |
+| **Chinese-Alpaca-2-13B-16K**                                 |        86.84%        |  1580   |
+| **Chinese-Alpaca-2-13B**                                     |        72.01%        |  1579   |
+| [Chinese-Alpaca-Pro-33B](https://github.com/ymcui/Chinese-LLaMA-Alpaca) |        64.87%        |  1548   |
+| **Chinese-Alpaca-2-7B**                                      |        64.11%        |  1572   |
+| [Chinese-Alpaca-Pro-7B](https://github.com/ymcui/Chinese-LLaMA-Alpaca) |        62.05%        |  1500   |
+| **Chinese-Alpaca-2-7B-16K**                                  |        61.67%        |  1540   |
+| [Chinese-Alpaca-Pro-13B](https://github.com/ymcui/Chinese-LLaMA-Alpaca) |        61.26%        |  1567   |
+| [Chinese-Alpaca-Plus-33B](https://github.com/ymcui/Chinese-LLaMA-Alpaca) |        31.29%        |  1401   |
+| [Chinese-Alpaca-Plus-13B](https://github.com/ymcui/Chinese-LLaMA-Alpaca) |        23.43%        |  1329   |
+| [Chinese-Alpaca-Plus-7B](https://github.com/ymcui/Chinese-LLaMA-Alpaca) |        20.92%        |  1379   |
 
 > [!NOTE]
-> Results are based . For the latest results, see [**⚔️Arena**](http://llm-arena.ymcui.com/).
+> Results timestamp: Sep 1. 2023 . For the latest results, see [**⚔️Arena**](http://llm-arena.ymcui.com/).
 
 ### NLU Performance Evaluation: C-Eval
 
@@ -190,23 +230,37 @@ In order to intuitively understand the generation performance of the model, this
 | Chinese-LLaMA-Plus-13B  |    29.6 / 34.0    | Chinese-Alpaca-Plus-13B  |    40.6 / 39.9    |
 | Chinese-LLaMA-Plus-7B   |    25.4 / 26.3    | Chinese-Alpaca-Plus-7B   |    36.8 / 32.6    |
 
+### Long Context Model (16K) Evaluation
+
+[LongBench](https://github.com/THUDM/LongBench) is a benchmark for testing LLM's long context ability, consisting of 6 categories and 20 tasks. The average length of most of the task ranges from 5K to 15K. LongBench has 4.5K test samples in total. The followings are the results on Chinese subtasks. For LongBench inference code, please refer to this project's [📖GitHub Wiki](https://github.com/ymcui/Chinese-LLaMA-Alpaca-2/wiki/longbench_en)
+
+| Models                      | Single-doc QA | Multi-doc QA | Summarization | Few-shot Learning | Code Completion | Synthetic Task | Avg  |
+| --------------------------- | :-----------: | :----------: | :-----------: | :---------------: | :-------------: | :------------: | :--: |
+| **Chinese-Alpaca-2-13B-16K** |   47.9  |   26.7 | 13.0 |     22.3    |   46.6   |   21.5   | 29.7 |
+| Chinese-Alpaca-2-13B         |   38.4   |   20.0   | 11.9 |     17.3    |   46.5   |   8.0    | 23.7 |
+| **Chinese-Alpaca-2-7B-16K**  |   46.4  |   23.3  | 14.3 |     29.0     |   49.6   |   9.0    | 28.6 |
+| Chinese-Alpaca-2-7B          |   34.0   |   17.4   | 11.8 |     21.3    |   50.3  |   4.5    | 23.2 |
+| **Chinese-LLaMA-2-13B-16K**  |   36.7   |   17.7  | 3.1 |     29.8     |   13.8   |   3.0    | 17.3 |
+| Chinese-LLaMA-2-13B          |   28.3   |   14.4   | 4.6 |     16.3     |   10.4   |   5.4    | 13.2 |
+| **Chinese-LLaMA-2-7B-16K**   |   33.2   |   15.9   | 6.5 |     23.5     |   10.3    |   5.3    | 15.8|
+| Chinese-LLaMA-2-7B           |   19.0   |   13.9   | 6.4  |     11.0    |   11.0   |   4.7    | 11.0 |
 
 ### Quantization Evaluation
 
 To understand the quality loss brought by quantization, taking Chinese-LLaMA-2-7B as an example, we report the model size, PPL, C-eval results under different quantization levels. PPL is calculated under 4K context, and we report zero-shot and 5-shot results on C-Eval valid set.
 
-| Precision | Model Size |  PPL   |   C-Eval    |
-| :-------- | :--------: | :----: | :---------: |
-| FP16      |  12.9 GB   | 9.373  | 28.2 / 36.0 |
-| 8-bit量化 |   6.8 GB   | 9.476  | 26.8 / 35.4 |
-| 4-bit量化 |   3.7 GB   | 10.132 | 25.5 / 32.8 |
+| Precision       | Model Size |  PPL   |   C-Eval    |
+| :-------------- | :--------: | :----: | :---------: |
+| FP16            |  12.9 GB   | 9.373  | 28.2 / 36.0 |
+| 8-bit quantized |   6.8 GB   | 9.476  | 26.8 / 35.4 |
+| 4-bit quantized |   3.7 GB   | 10.132 | 25.5 / 32.8 |
 
 Specifically, the followings are the benchmark for different quantization methods in llama.cpp. The speed is presented with ms/tok. For details, see our [Wiki](https://github.com/ymcui/Chinese-LLaMA-Alpaca-2/wiki/llamacpp_en#quantization-method-and-inference-speed).
 
 | llama.cpp |    F16 |   Q2_K |  Q3_K |  Q4_0 |  Q4_1 |  Q4_K |  Q5_0 |  Q5_1 |  Q5_K |  Q6_K |  Q8_0 |
 | --------- | -----: | -----: | ----: | ----: | ----: | ----: | ----: | ----: | ----: | ----: | ----: |
-| PPL       |  9.128 | 13.640 | 9.910 | 9.476 | 9.576 | 9.257 | 9.156 | 9.213 | 9.141 | 9.143 | 9.129 |
-| Size      | 12.91G |  2.77G | 3.17G | 3.69G | 4.08G | 3.92G | 4.47G | 4.86G | 4.59G | 5.30G | 6.81G |
+| PPL       |  9.128 | 11.107 | 9.576 | 9.476 | 9.576 | 9.240 | 9.156 | 9.213 | 9.168 | 9.133 | 9.129 |
+| Size      | 12.91G |  2.41G | 3.18G | 3.69G | 4.08G | 3.92G | 4.47G | 4.86G | 4.59G | 5.30G | 6.81G |
 | CPU Speed |    117 |     42 |    51 |    39 |    44 |    43 |    48 |    51 |    50 |    54 |    65 |
 | GPU Speed |     53 |     19 |    21 |    17 |    18 |    20 |     x |     x |    25 |    26 |     x |
 
@@ -228,6 +282,13 @@ Question 3: Do you accept third-party Pull Requests?
 Question 4: Why not perform full pre-training but use LoRA instead?
 Question 5: Does Llama-2 series support tools that support the first-gen LLaMA?
 Question 6: Is Chinese-Alpaca-2 trained from Llama-2-Chat?
+Question 7: Why does training with 24GB VRAM lead to an OOM error when fine-tuning chinese-alpaca-2-7b?
+Question 8: Can the 16K long-context version model replace the standard version model?
+Question 9: How to interprete the results of third-party benchmarks?
+Question 10: Will you release 34B or 70B models?
+Question 11: Why the long-context model is 16K context, not 32K or 100K?
+Question 12: Why does the Alpaca model reply that it is ChatGPT?
+Question 13: Why is the adapter_model.bin in the pt_lora_mdoel or sft_lora_model folder only a few hundred kb?
 ```
 
 For specific questions and answers, please refer to the project >>> [📚 GitHub Wiki](https://github.com/ymcui/Chinese-LLaMA-Alpaca-2/wiki/faq_en)

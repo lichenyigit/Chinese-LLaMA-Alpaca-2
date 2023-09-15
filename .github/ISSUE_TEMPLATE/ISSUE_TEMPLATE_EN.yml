@@ -15,7 +15,7 @@ body:
           required: true
         - label: I have read the [Wiki](https://github.com/ymcui/Chinese-LLaMA-Alpaca-2/wiki) and [FAQ section](https://github.com/ymcui/Chinese-LLaMA-Alpaca-2/wiki/FAQ) AND searched for similar issues and did not find a similar problem or solution
           required: true
-        - label: Third-party plugin issues - e.g., [llama.cpp](https://github.com/ggerganov/llama.cpp), [text-generation-webui](https://github.com/oobabooga/text-generation-webui), we recommend checking the corresponding project for solutions
+        - label: Third-party plugin issues - e.g., [llama.cpp](https://github.com/ggerganov/llama.cpp), [LangChain](https://github.com/hwchase17/langchain), [text-generation-webui](https://github.com/oobabooga/text-generation-webui), we recommend checking the corresponding project for solutions
           required: true
   - type: dropdown
     id: question-type
@@ -36,8 +36,11 @@ body:
       label: Base Model
       description: Please provide the type of base model. For issues related to multiple models, please select the most appropriate one and specify all models in the main text.
       options:
-        - LLaMA-2-7B
-        - Alpaca-2-7B
+        - Chinese-LLaMA-2 (7B/13B)
+        - Chinese-Alpaca-2 (7B/13B)
+        - Chinese-LLaMA-2-16K (7B/13B)
+        - Chinese-Alpaca-2-16K (7B/13B)
+        - Others
   - type: dropdown
     id: operating-system
     attributes:
@@ -60,7 +63,7 @@ body:
     id: dependencies
     attributes:
       label: Dependencies (must be provided for code-related issues)
-      description: Please provide the versions of common dependencies such as transformers, peft, torch, etc. Use `pip list | grep -E 'transformers|peft|torch'`
+      description: Please provide the versions of common dependencies such as transformers, peft, torch, etc. Use `pip list | grep -E 'transformers|peft|torch|sentencepiece|bitsandbytes'`
       value: |
         ```
         # Please copy-and-paste your dependencies here.
