@@ -11,7 +11,7 @@ chinese_tokenizer_path=/content/chinese-alpaca-2-7b
 dataset_dir=/content/china-law-datas/datasQA
 per_device_train_batch_size=1
 per_device_eval_batch_size=1
-gradient_accumulation_steps=8
+gradient_accumulation_steps=4
 output_dir=output_dir
 validation_file=/content/china-law-datas/datasQA/1.json
 
