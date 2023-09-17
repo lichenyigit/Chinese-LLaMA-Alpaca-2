@@ -11,9 +11,10 @@ chinese_tokenizer_path=/content/chinese-alpaca-2-7b
 dataset_dir=/content/china-law-datas/dataJson
 per_device_train_batch_size=1
 per_device_eval_batch_size=1
-gradient_accumulation_steps=4
+gradient_accumulation_steps=1
 output_dir=output_dir
 validation_file=/content/china-law-datas/dataJson/1.json
+max_seq_length=512
 
 deepspeed_config_file=ds_zero2_no_offload.json
 
@@ -43,7 +44,7 @@ torchrun --nnodes 1 --nproc_per_node 1 run_clm_sft_with_peft.py \
     --save_steps 200 \
     --gradient_accumulation_steps ${gradient_accumulation_steps} \
     --preprocessing_num_workers 8 \
-    --max_seq_length 1024 \
+    --max_seq_length ${max_seq_length} \
     --output_dir ${output_dir} \
     --overwrite_output_dir \
     --ddp_timeout 30000 \
@@ -55,5 +56,4 @@ torchrun --nnodes 1 --nproc_per_node 1 run_clm_sft_with_peft.py \
     --lora_dropout ${lora_dropout} \
     --torch_dtype float16 \
     --validation_file ${validation_file} \
-    --gradient_checkpointing \
-    --ddp_find_unused_parameters False
+    --load_in_kbits
