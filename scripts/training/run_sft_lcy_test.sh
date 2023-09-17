@@ -14,7 +14,7 @@ per_device_eval_batch_size=1
 gradient_accumulation_steps=1
 output_dir=output_dir
 validation_file=/content/china-law-datas/dataJson/1.json
-max_seq_length=512
+max_seq_length=256
 
 deepspeed_config_file=ds_zero2_no_offload.json
 
@@ -56,4 +56,4 @@ torchrun --nnodes 1 --nproc_per_node 1 run_clm_sft_with_peft.py \
     --lora_dropout ${lora_dropout} \
     --torch_dtype float16 \
     --validation_file ${validation_file} \
-    --load_in_kbits 16
+    --load_in_kbits 8
