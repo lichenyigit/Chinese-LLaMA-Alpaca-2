@@ -56,4 +56,4 @@ torchrun --nnodes 1 --nproc_per_node 1 run_clm_sft_with_peft.py \
     --lora_dropout ${lora_dropout} \
     --torch_dtype float16 \
     --validation_file ${validation_file} \
-    --load_in_kbits fp16
+    --load_in_kbits 16
