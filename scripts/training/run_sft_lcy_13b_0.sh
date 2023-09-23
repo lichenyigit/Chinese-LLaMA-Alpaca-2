@@ -8,7 +8,7 @@ lora_dropout=0.05
 
 pretrained_model=/content/chinese-alpaca-2-13b
 chinese_tokenizer_path=/content/chinese-alpaca-2-13b
-dataset_dir=/content/china-law-datas/t
+dataset_dir=/content/china-law-datas/test
 per_device_train_batch_size=1
 per_device_eval_batch_size=1
 gradient_accumulation_steps=1
