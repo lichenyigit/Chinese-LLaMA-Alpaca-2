@@ -8,12 +8,12 @@ lora_dropout=0.05
 
 pretrained_model=/content/chinese-alpaca-2-13b
 chinese_tokenizer_path=/content/chinese-alpaca-2-13b
-dataset_dir=/content/china-law-datas/test
+dataset_dir=/content/china-law/
 per_device_train_batch_size=1
 per_device_eval_batch_size=1
 gradient_accumulation_steps=1
 output_dir=output_dir
-validation_file=/content/china-law-datas/dataJson/1.json
+validation_file=/content/china-law/pCLUE_train_1.json
 max_seq_length=256
 
 deepspeed_config_file=ds_zero2_no_offload.json
