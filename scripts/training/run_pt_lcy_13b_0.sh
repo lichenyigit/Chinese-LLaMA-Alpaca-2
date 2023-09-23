@@ -7,9 +7,9 @@ lora_trainable="q_proj,v_proj,k_proj,o_proj,gate_proj,down_proj,up_proj"
 modules_to_save="embed_tokens,lm_head"
 lora_dropout=0.05
 
-pretrained_model=/content/chinese-llama-2-7b
-chinese_tokenizer_path=/content/chinese-llama-2-7b
-dataset_dir=/content/china-law-datas/datasQA
+pretrained_model=/content/chinese-llama-2-13b
+chinese_tokenizer_path=/content/chinese-llama-2-13b
+dataset_dir=/content/china-law-datas/test
 data_cache=/content/temp_data_cache_dir
 per_device_train_batch_size=1
 gradient_accumulation_steps=8
