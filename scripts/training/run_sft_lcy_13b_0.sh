@@ -13,7 +13,7 @@ per_device_train_batch_size=1
 per_device_eval_batch_size=1
 gradient_accumulation_steps=1
 output_dir=output_dir
-validation_file=/content/china-law/csl-10000.json
+validation_file=/content/china-law/csl.json
 max_seq_length=256
 
 deepspeed_config_file=ds_zero2_no_offload.json
