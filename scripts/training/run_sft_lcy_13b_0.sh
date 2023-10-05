@@ -13,7 +13,7 @@ per_device_train_batch_size=1
 per_device_eval_batch_size=1
 gradient_accumulation_steps=1
 output_dir=/content/drive/MyDrive/AI/chinese-alpaca-2-13b/output_dir
-validation_file=/content/china-law/csl.json
+validation_file=/content/china-law/1.json
 max_seq_length=256
 
 deepspeed_config_file=ds_zero2_no_offload.json
