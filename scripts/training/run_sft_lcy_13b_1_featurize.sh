@@ -6,13 +6,13 @@ lora_trainable="q_proj,v_proj,k_proj,o_proj,gate_proj,down_proj,up_proj"
 modules_to_save="embed_tokens,lm_head"
 lora_dropout=0.05
 
-pretrained_model=/home/featurize/chinese-alpaca-2-13b
-chinese_tokenizer_path=/home/featurize/chinese-alpaca-2-13b
+pretrained_model=/home/featurize/chinese-llama-2-13b
+chinese_tokenizer_path=/home/featurize/chinese-llama-2-13b
 dataset_dir=/home/featurize/china-law/
 per_device_train_batch_size=1
 per_device_eval_batch_size=1
 gradient_accumulation_steps=1
-output_dir=/home/featurize/chinese-alpaca-2-13b/output_dir
+output_dir=/home/featurize/chinese-llama-2-13b/output_dir
 validation_file=/home/featurize/china-law/1.json
 max_seq_length=64
 
