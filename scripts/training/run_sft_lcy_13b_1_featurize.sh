@@ -41,7 +41,7 @@ torchrun --nnodes 1 --nproc_per_node 1 run_clm_sft_with_peft.py \
     --save_total_limit 3 \
     --evaluation_strategy steps \
     --eval_steps 300 \
-    --save_steps 200 \
+    --save_steps 300 \
     --gradient_accumulation_steps ${gradient_accumulation_steps} \
     --preprocessing_num_workers 8 \
     --max_seq_length ${max_seq_length} \
