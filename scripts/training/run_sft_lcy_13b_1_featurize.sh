@@ -14,7 +14,7 @@ per_device_eval_batch_size=1
 gradient_accumulation_steps=1
 output_dir=/home/featurize/chinese-llama-2-13b-16k/output_dir
 validation_file=/home/featurize/china-law/1.json
-max_seq_length=64
+max_seq_length=256
 
 deepspeed_config_file=ds_zero2_no_offload.json
 
