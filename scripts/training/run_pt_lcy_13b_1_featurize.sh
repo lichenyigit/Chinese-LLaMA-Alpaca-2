@@ -14,7 +14,8 @@ data_cache=temp_data_cache_dir
 per_device_train_batch_size=1
 gradient_accumulation_steps=8
 block_size=512
-output_dir=/home/featurize/chinese-alpaca-2-13b-16k/output_dir
+utput_dir=/home/featurize/chinese-alpaca-2-13b-16k/output_dir
+seed=44
 
 deepspeed_config_file=ds_zero2_no_offload.json
 
@@ -27,7 +28,7 @@ torchrun --nnodes 1 --nproc_per_node 1 run_clm_pt_with_peft.py \
     --validation_split_percentage 0.001 \
     --per_device_train_batch_size ${per_device_train_batch_size} \
     --do_train \
-    --seed $RANDOM \
+    --seed ${seed} \
     --fp16 \
     --num_train_epochs 1 \
     --lr_scheduler_type cosine \
