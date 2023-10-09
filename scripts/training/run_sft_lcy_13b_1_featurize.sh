@@ -12,7 +12,7 @@ dataset_dir=/home/featurize/china-law/
 per_device_train_batch_size=1
 per_device_eval_batch_size=1
 gradient_accumulation_steps=1
-output_dir=/home/featurize/chinese-alpaca-2-13b-16k/output_dir
+output_dir=/home/featurize/chinese-alpaca-2-13b-16k/output_dir_sft
 validation_file=/home/featurize/china-law/1.json
 max_seq_length=128
 
