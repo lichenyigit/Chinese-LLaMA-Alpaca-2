@@ -14,7 +14,7 @@ data_cache=temp_data_cache_dir
 per_device_train_batch_size=1
 gradient_accumulation_steps=8
 block_size=512
-output_dir=/home/featurize/chinese-alpaca-2-13b-16k/output_dir
+output_dir=/home/featurize/chinese-alpaca-2-13b-16k/output_dir_pt
 seed=44
 
 deepspeed_config_file=ds_zero2_no_offload.json
